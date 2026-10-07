@@ -2,7 +2,9 @@
 import os, json, re
 from datetime import datetime
 from dotenv import load_dotenv
+
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String, Float, Text, DateTime, JSON
@@ -103,6 +105,11 @@ def analyze(title: str, desc: str) -> dict:
 
 # ---------- API ----------
 app = FastAPI(title="IT-AI")
+@app.get("/")
+def home():
+    return FileResponse("index.html")
+
+    
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 class NewTicket(BaseModel):
