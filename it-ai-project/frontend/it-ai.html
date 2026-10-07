@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FixIQ — Intelligent IT Service Desk</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1a110d;--bg2:#2b1d16;--card:rgba(255,244,232,.06);--bd:rgba(255,196,140,.14);--tx:#fff4ea;--mu:#d7b79b;--bl:#f59e0b;--pu:#f97316;--ok:#34d399;--wa:#fbbf24;--er:#f87171;--cr:#ff8b5e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme=light]{--bg:#fff7f1;--bg2:#f7e3d3;--card:#fff;--bd:#eacdb2;--tx:#2c1d17;--mu:#7f5f52}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#fff7f1;--bg2:#f7e3d3;--card:#fff;--bd:#eacdb2;--tx:#2c1d17;--mu:#7f5f52}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:radial-gradient(900px 500px at 80% -10%,rgba(249,115,22,.22),transparent),radial-gradient(800px 500px at 0 0,rgba(245,158,11,.18),transparent),var(--bg);color:var(--tx);min-height:100vh}
+a{color:inherit;text-decoration:none}
+.app{display:flex;min-height:100vh}
+nav{width:230px;padding:18px 12px;border-right:1px solid var(--bd);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:3px;flex-shrink:0;background:rgba(0,0,0,.12)}
+.logo{font-weight:800;font-size:20px;padding:6px 10px 16px;display:flex;align-items:center;gap:8px}
+.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--bl),var(--pu));display:inline-block;box-shadow:0 0 18px rgba(139,92,246,.6)}
+nav a{padding:9px 12px;border-radius:10px;color:var(--mu);font-weight:500;font-size:14px;transition:.15s}
+nav a:hover,nav a.on{background:var(--card);color:var(--tx)}
+nav a.on{box-shadow:inset 2px 0 var(--bl)}
+main{flex:1;padding:26px;min-width:0;max-width:1180px;margin:0 auto}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:17px;margin:0 0 12px}h3{margin:0 0 6px}
+.sub{color:var(--mu);margin:0 0 22px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;backdrop-filter:blur(10px);box-shadow:0 8px 30px rgba(0,0,0,.18)}
+.grid{display:grid;gap:14px}.g3{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.stat b{display:block;font-size:30px;margin-top:4px}.stat span{color:var(--mu);font-size:13px}
+.btn{border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--bl),var(--pu));transition:.15s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.btn.g{background:var(--card);border:1px solid var(--bd);color:var(--tx)}.btn.r{background:linear-gradient(135deg,#ff4d6d,#c026d3)}.btn.s{padding:6px 10px;font-size:12px}
+:focus-visible{outline:2px solid var(--bl);outline-offset:2px}
+input,textarea,select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--bd);background:rgba(127,127,160,.1);color:var(--tx);font:inherit;margin:4px 0 12px}
+label{font-size:13px;color:var(--mu)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--bd)}th{color:var(--mu);font-weight:500;font-size:12px}
+tr.row{cursor:pointer}tr.row:hover td{background:var(--card)}
+.tbl{overflow-x:auto}
+.pill{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;display:inline-block;white-space:nowrap}
+.LOW{background:rgba(52,211,153,.15);color:var(--ok)}.MEDIUM{background:rgba(251,191,36,.15);color:var(--wa)}.HIGH{background:rgba(251,146,60,.18);color:#fb923c}.CRITICAL{background:rgba(255,77,109,.18);color:var(--cr)}
+.RESOLVED{background:rgba(52,211,153,.15);color:var(--ok)}.ESCALATED{background:rgba(255,77,109,.18);color:var(--cr)}.IN-PROGRESS,.OPEN{background:rgba(79,140,255,.18);color:var(--bl)}
+.bar{height:8px;border-radius:9px;background:rgba(127,127,160,.2);overflow:hidden}.bar i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--bl),var(--pu));transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.row2{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}.kv div span{display:block;color:var(--mu);font-size:12px;margin-bottom:3px}.kv div b{font-size:15px}
+.hero{padding:50px 0 30px;max-width:760px}.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.08;letter-spacing:-.02em}
+.flow{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0}
+.flow div{flex:1 1 120px;padding:14px;border-radius:14px;border:1px solid var(--bd);background:var(--card);text-align:center;font-size:13px;font-weight:700;position:relative;animation:pulse 6s infinite}
+.flow div:nth-child(2){animation-delay:1s}.flow div:nth-child(3){animation-delay:2s}.flow div:nth-child(4){animation-delay:3s}.flow div:nth-child(5){animation-delay:4s}.flow div:nth-child(6){animation-delay:5s}
+@keyframes pulse{0%,16%{border-color:var(--bl);box-shadow:0 0 22px rgba(79,140,255,.45)}30%,100%{border-color:var(--bd);box-shadow:none}}
+.step{display:flex;align-items:center;gap:12px;padding:11px 0;color:var(--mu);transition:.3s}
+.step .d{width:24px;height:24px;border-radius:50%;border:2px solid var(--bd);display:grid;place-items:center;font-size:12px}
+.step.proc{color:var(--tx)}.step.proc .d{border-color:var(--bl);border-top-color:transparent;animation:spin .7s linear infinite}
+.step.done{color:var(--tx)}.step.done .d{background:var(--ok);border-color:var(--ok);color:#052}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tl{border-left:2px solid var(--bd);margin-left:6px;padding-left:18px}.tl div{position:relative;padding:0 0 16px;animation:in .4s both}.tl div:before{content:"";position:absolute;left:-25px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--bl)}.tl small{color:var(--mu);display:block}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.banner{padding:14px 16px;border-radius:12px;font-weight:700;margin:12px 0}.banner.ok{background:rgba(52,211,153,.12);color:var(--ok);border:1px solid rgba(52,211,153,.35)}.banner.no{background:rgba(255,77,109,.12);color:var(--cr);border:1px solid rgba(255,77,109,.35)}
+.chat{display:flex;flex-direction:column;gap:10px;min-height:300px;max-height:55vh;overflow:auto;padding:4px}
+.msg{max-width:82%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.5;animation:in .3s}.msg.u{align-self:flex-end;background:linear-gradient(135deg,var(--bl),var(--pu));color:#fff}.msg.a{background:var(--card);border:1px solid var(--bd)}
+.cols{display:flex;gap:8px;align-items:flex-end;height:140px}.cols div{flex:1;background:linear-gradient(var(--pu),var(--bl));border-radius:6px 6px 0 0;position:relative;transition:height 1s;min-width:12px}.cols div span{position:absolute;bottom:-20px;left:0;right:0;text-align:center;font-size:10px;color:var(--mu)}
+.skel{height:14px;border-radius:6px;background:linear-gradient(90deg,var(--card),var(--bd),var(--card));background-size:200%;animation:sh 1.2s infinite;margin:8px 0}@keyframes sh{to{background-position:-200% 0}}
+.view{animation:in .35s}
+.demo button{margin:0 6px 6px 0}
+.tag{font-size:12px;color:var(--mu)}
+.top{display:none}
+@media(max-width:820px){.app{flex-direction:column}nav{width:100%;height:auto;position:static;flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--bd)}.logo{padding:6px 10px}nav a{white-space:nowrap}main{padding:16px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="app"><nav id="nav"></nav><main id="v"></main></div>
+<script>
+const $=s=>document.querySelector(s);
+const KB=[
+{t:'VPN Troubleshooting Guide',c:'Network',k:/vpn/,u:'2026-09-28',v:1840,s:['Disconnect your current VPN session','Restart the VPN client','Verify your internet connection','Reconnect with your company credentials','If it still fails, contact IT support']},
+{t:'Password Reset Guide',c:'Account & Access',k:/password|forgot|login|locked/,u:'2026-09-20',v:3120,s:['Open the self-service portal','Choose "Forgot password"','Verify with your registered phone or email code','Set a new password (12+ characters)','Sign in again on all devices']},
+{t:'Wi-Fi Troubleshooting Guide',c:'Network',k:/wi-?fi|wireless|internet/,u:'2026-08-30',v:980,s:['Toggle Wi-Fi off and on','Forget and rejoin the network','Restart your router/laptop','Run the network diagnostics tool']},
+{t:'Email Troubleshooting Guide',c:'Email',k:/email|outlook|mailbox/,u:'2026-09-02',v:1210,s:['Check webmail to isolate the client','Restart Outlook in safe mode','Rebuild your mail profile','Confirm mailbox quota']},
+{t:'Laptop & Hardware Guide',c:'Hardware',k:/mouse|keyboard|laptop|macbook|thinkpad|lenovo|dell|hp|surface|monitor|printer/,u:'2026-07-19',v:760,s:['Check cable or battery','Try another USB port','Reconnect Bluetooth pairing','Restart the device and update drivers','Verify the laptop model and BIOS/driver status']},
+{t:'Operating System Support Guide',c:'Operating System',k:/windows 11|windows 10|macos|ubuntu|linux|chromeos|os/,u:'2026-07-12',v:640,s:['Confirm the exact OS version and build','Check for pending updates and restarts','Verify device drivers and security tools','Run the built-in system diagnostics']},
+{t:'Software Installation Guide',c:'Software',k:/install|software|license/,u:'2026-06-11',v:540,s:['Open the Company Software Center','Request the app','Wait for manager approval','Install from the Software Center']},
+{t:'Security Incident Procedure',c:'Security',k:/suspicious|phish|malware|virus|hack/,u:'2026-09-15',v:690,s:['Do not click links or reply','Report with the Phish Alert button','Security team investigates sender and scope']},
+{t:'Server Incident Response Guide',c:'Infrastructure',k:/server|production|outage|down/,u:'2026-08-05',v:430,s:['Declare an incident','Page the on-call DevOps engineer','Check health dashboards and recent deploys','Human approval before any rollback']},
+{t:'Database Troubleshooting Guide',c:'Database',k:/database|sql|query/,u:'2026-05-22',v:310,s:['Check connections and locks','Review slow query log','DBA approval before changes']}];
+const RULES=[
+[/production|server.*(down|unavailable)|customers (cannot|can't)|outage/,'Infrastructure','Server Outage','CRITICAL',91,'DevOps / Infrastructure','Production infrastructure failure requires human intervention.'],
+[/suspicious|phish|malware|ransom/,'Security','Phishing','CRITICAL',93,'Security Team','Possible credential-theft attempt requires a security investigation.'],
+[/database|sql/,'Database','Performance','HIGH',78,'Database Admins','Database changes carry data-loss risk and need DBA approval.'],
+[/vpn/,'Network','VPN','HIGH',96,'Network Team',''],
+[/password|forgot|locked|login/,'Account & Access','Password Reset','MEDIUM',94,'Service Desk',''],
+[/email|outlook/,'Email','Mailbox','MEDIUM',90,'Messaging Team',''],
+[/wi-?fi|wireless/,'Network','Wi-Fi','MEDIUM',92,'Network Team',''],
+[/windows 11|windows 10|macos|ubuntu|linux|chromeos|operating system|os/,'Operating System','OS Issue','MEDIUM',88,'Desktop Support','The device operating system needs validation and likely update or driver repair.'],
+[/laptop|macbook|thinkpad|lenovo|dell|hp|surface|notebook/,'Hardware','Laptop','LOW',92,'Desktop Support',''],
+[/mouse|keyboard|monitor|printer/,'Hardware','Peripheral','LOW',92,'Desktop Support',''],
+[/install|software|license/,'Software','Installation','LOW',89,'Desktop Support','']];
+const now=()=>new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+let T=[
+{id:1024,title:'VPN not working',cat:'Network',sub:'VPN',pri:'HIGH',status:'IN-PROGRESS',conf:96,team:'Network Team',date:'Oct 6',method:'AI Assisted',res:'—',log:[['10:30','Ticket created'],['10:30','AI classification completed']]},
+{id:1023,title:'Password reset',cat:'Account & Access',sub:'Password Reset',pri:'LOW',status:'RESOLVED',conf:94,team:'Service Desk',date:'Oct 5',method:'AI Assisted',res:'38 sec',log:[['09:10','Ticket created'],['09:11','Ticket resolved']]},
+{id:1022,title:'Email unavailable',cat:'Email',sub:'Mailbox',pri:'MEDIUM',status:'RESOLVED',conf:90,team:'Messaging Team',date:'Oct 4',method:'Human',res:'26 min',log:[['14:00','Ticket created'],['14:26','Ticket resolved']]}];
+function analyze(title,desc){
+ const x=(title+' '+desc).toLowerCase();
+ const r=RULES.find(r=>r[0].test(x))||[0,'Other','General','MEDIUM',62,'Service Desk','Low confidence — no matching knowledge found.'];
+ let pri=r[3];if(/meeting|urgent|asap|immediately/.test(x)&&pri==='MEDIUM')pri='HIGH';
+ const frus=/meeting|urgent|asap|cannot|can't|not working|down|!/.test(x);
+ const kb=KB.find(d=>d.k.test(x));
+ const auto=r[4]>=85&&pri!=='CRITICAL';
+ return{cat:r[1],sub:r[2],pri,conf:r[4],team:r[5],sent:frus?'Frustrated':'Neutral',kb,rel:kb?Math.min(97,r[4]-2):0,auto,
+  why:auto?'Confidence is above 85% and the issue is not high-risk.':(pri==='CRITICAL'?'Critical tickets always require human review. '+r[6]:'Confidence is below 85%. '+r[6]),
+  reason:`The ticket describes a ${r[2].toLowerCase()} issue in ${r[1]}.${/meeting|urgent|asap/.test(x)?' The user signals urgency because of an upcoming deadline.':''}`};
+}
+function log(t,m){t.log.push([now(),m])}
+const nav=[['','Home'],['dashboard','Dashboard'],['create','Create Ticket'],['assistant','AI Assistant'],['kb','Knowledge Base'],['engineer','Engineer Console'],['analytics','Analytics'],['admin','Admin']];
+const pill=(v,c)=>`<span class="pill ${c||v}">${v}</span>`;
+const get=id=>T.find(t=>t.id==id);
+function count(el){const n=+el.dataset.n,s=performance.now();(function f(t){const p=Math.min(1,(t-s)/900);el.textContent=Math.round(n*p).toLocaleString();if(p<1)requestAnimationFrame(f)})(s)}
+function bars(){document.querySelectorAll('.bar i,.cols div').forEach(b=>{const w=b.dataset.w;if(b.parentElement.classList.contains('cols'))b.style.height=w+'%';else b.style.width=w+'%'})}
+function ticketTable(list,eng){return `<div class="tbl"><table><tr><th>ID<th>Title<th>Category<th>Priority<th>Status<th>Created${eng?'<th>Team':''}</tr>${list.map(t=>`<tr class="row" onclick="location.hash='#/ticket/${t.id}'"><td>#${t.id}<td>${t.title}<td>${t.cat}<td>${pill(t.pri)}<td>${pill(t.status)}<td>${t.date}${eng?'<td>'+t.team:''}</tr>`).join('')}</table></div>`}
+const V={
+home(){return `<section class="hero"><h1>AI-Powered IT Support That Thinks, Solves &amp; Escalates</h1><p class="sub" style="font-size:17px">Automatically classify IT tickets, detect priority, retrieve solutions, and resolve common issues with AI — while keeping human experts in control.</p><div class="row2"><button class="btn" onclick="location.hash='#/create'">Create Ticket</button><button class="btn g" onclick="location.hash='#/create?demo=1'">View AI Demo</button></div></section>
+<div class="flow"><div>Ticket</div><div>AI Classification</div><div>Priority Detection</div><div>Knowledge Search</div><div>AI Resolution</div><div>Resolve / Escalate</div></div>
+<div class="grid g2"><div class="card"><h3>The problem</h3><p class="sub" style="margin:0">Thousands of tickets a day are read, categorised, prioritised, routed and answered by hand. Resolutions are slow and engineers burn out on repeat issues.</p></div>
+<div class="card"><h3>Our solution</h3><p class="sub" style="margin:0">An AI service desk that understands, classifies, resolves, and intelligently escalates tickets, using your own company knowledge.</p></div></div>
+<h2 style="margin-top:26px">What the AI does</h2><div class="grid g3">${['Understands context and sentiment','Classifies category and subcategory','Detects priority from business impact','Searches the knowledge base (RAG)','Writes a safe, step-by-step fix','Escalates when confidence is low or risk is high'].map(x=>`<div class="card">${x}</div>`).join('')}</div>
+<h2 style="margin-top:26px">Impact</h2><div class="grid g3"><div class="card stat"><span>Manual triage removed</span><b>64%</b></div><div class="card stat"><span>Average resolution</span><b>18 min</b></div><div class="card stat"><span>Humans in control of critical issues</span><b>100%</b></div></div>
+<h2 style="margin-top:26px">Live demo</h2><div class="card demo"><p class="sub">Pick a sample ticket and watch the pipeline run.</p>${DEMOS.map((d,i)=>`<button class="btn g s" onclick="location.hash='#/create?demo=${i+1}'">${d[0]}</button>`).join('')}</div>`},
+dashboard(){const o=T.filter(t=>t.status!=='RESOLVED').length,r=T.filter(t=>t.status==='RESOLVED').length;
+ return `<h1>Welcome back 👋</h1><p class="sub">Here is where your tickets stand.</p><div class="grid g3">${[['Total Tickets',T.length],['Open Tickets',o],['Resolved Tickets',r],['Pending Tickets',T.filter(t=>t.status==='IN-PROGRESS').length]].map(s=>`<div class="card stat"><span>${s[0]}</span><b data-n="${s[1]}">0</b></div>`).join('')}</div>
+ <div class="card" style="margin-top:14px"><div class="row2" style="justify-content:space-between"><h2>Recent tickets</h2><button class="btn s" onclick="location.hash='#/create'">New ticket</button></div>${ticketTable([...T].sort((a,b)=>b.id-a.id))}</div>`},
+create(q){const d=DEMOS[(+q.get('demo'))-1];
+ return `<h1>Create ticket</h1><p class="sub">Describe the problem. The AI reads it as soon as you submit.</p><div class="grid g2"><div class="card" id="form"><label>Problem title</label><input id="ti" value="${d?d[1]:''}" placeholder="VPN is not connecting"><label>Problem description</label><textarea id="de" rows="5" placeholder="What happened, and how urgent is it?">${d?d[2]:''}</textarea><div class="grid g2" style="gap:0 12px"><div><label>Device category</label><select><option>Laptop<option>Desktop<option>Phone<option>Tablet</select></div><div><label>Operating system</label><select><option>Windows 11<option>Windows 10<option>macOS Sonoma<option>macOS Ventura<option>Ubuntu<option>Linux<option>ChromeOS</select></div></div><label>Laptop model</label><input placeholder="e.g. Dell Latitude 7440, MacBook Pro 14, Lenovo ThinkPad"><label>Application</label><input placeholder="e.g. GlobalProtect"><label>Attachments</label><input type="file"><button class="btn" onclick="submitTicket()">Submit Ticket</button></div>
+ <div class="card"><h3>Sample tickets</h3><p class="sub">One click fills the form.</p><div class="demo">${DEMOS.map((x,i)=>`<button class="btn g s" onclick="location.hash='#/create?demo=${i+1}'">${x[0]}</button>`).join('')}</div></div></div>`},
+analysis(id){const t=get(id),a=t.a;
+ return `<h1>AI ticket analysis</h1><p class="sub">#${t.id} · ${t.title}</p>
+ <div class="grid g2"><div class="card"><h2>Ticket</h2><p style="margin:0 0 14px;line-height:1.5">${t.desc||t.title}</p><h2>AI classification</h2><div class="kv"><div><span>Category</span><b>${a.cat}</b></div><div><span>Subcategory</span><b>${a.sub}</b></div><div><span>Priority</span>${pill(a.pri)}</div><div><span>Sentiment</span><b>${a.sent}</b></div></div>
+ <p class="tag" style="margin:16px 0 4px">AI confidence <b style="color:var(--tx)">${a.conf}%</b></p><div class="bar"><i data-w="${a.conf}"></i></div><p class="tag" style="margin-top:14px"><b style="color:var(--tx)">Reasoning.</b> ${a.reason}</p></div>
+ <div class="card"><h2>Relevant knowledge found</h2>${a.kb?`<div class="kv"><div><span>Document</span><b>${a.kb.t}</b></div><div><span>Relevance</span><b>${a.rel}%</b></div></div><div class="bar" style="margin:10px 0 16px"><i data-w="${a.rel}"></i></div><h2>Recommended solution</h2><ol style="padding-left:20px;line-height:1.7;margin:0">${a.kb.s.map(s=>`<li>${s}</li>`).join('')}</ol>`:'<p class="sub">No matching guide. A human will review.</p>'}</div></div>
+ <div class="card" style="margin-top:14px" id="act">${actions(t)}</div>`},
+ticket(id){const t=get(id);
+ return `<h1>#${t.id} · ${t.title}</h1><p class="sub">${t.cat}${t.sub?' → '+t.sub:''}</p><div class="card"><div class="kv"><div><span>Category</span><b>${t.cat}</b></div><div><span>Priority</span>${pill(t.pri)}</div><div><span>Status</span>${pill(t.status)}</div><div><span>Assigned team</span><b>${t.team}</b></div><div><span>AI confidence</span><b>${t.conf}%</b></div><div><span>Resolution time</span><b>${t.res}</b></div><div><span>Method</span><b>${t.method}</b></div></div></div>
+ <div class="card" style="margin-top:14px"><h2>Timeline</h2><div class="tl">${t.log.map((l,i)=>`<div style="animation-delay:${i*.12}s"><b>${l[1]}</b><small>${l[0]}</small></div>`).join('')}</div>${t.a?`<button class="btn g s" onclick="location.hash='#/analysis/${t.id}'">Open AI analysis</button>`:''}</div>`},
+assistant(){return `<h1>FixIQ Assistant</h1><p class="sub">Describe a problem. The assistant classifies it and suggests fixes.</p><div class="card"><div class="chat" id="chat"><div class="msg a">Hi! Tell me what's wrong, e.g. "My laptop is connected to Wi-Fi but VPN isn't working."</div></div><div class="row2" style="margin-top:10px"><input id="cin" style="margin:0;flex:1" placeholder="Describe your IT problem" onkeydown="if(event.key==='Enter')chat()"><button class="btn" onclick="chat()">Send</button></div></div>`},
+kb(){return `<h1>Knowledge base</h1><p class="sub">Approved troubleshooting guides the AI draws from.</p><input id="ks" placeholder="Search troubleshooting guides..." oninput="kbf()"><div class="grid g3" id="kg">${kbCards('')}</div>`},
+engineer(){const c=n=>T.filter(n).length,order=['CRITICAL','HIGH','MEDIUM','LOW'];
+ return `<h1>Support center</h1><p class="sub">Review AI analysis and take over escalated work.</p><div class="grid g3">${[['Open Tickets',c(t=>t.status!=='RESOLVED')],['Critical Tickets',c(t=>t.pri==='CRITICAL')],['AI Resolved',824],['Human Resolved',312],['Avg Resolution (min)',18],['AI Accuracy %',94]].map(s=>`<div class="card stat"><span>${s[0]}</span><b data-n="${s[1]}">0</b></div>`).join('')}</div>
+ <div class="card" style="margin-top:14px"><h2>Ticket queue</h2>${ticketTable([...T].sort((a,b)=>order.indexOf(a.pri)-order.indexOf(b.pri)),1)}</div>
+ <p class="tag">Open a ticket to accept the AI solution, change priority, assign, escalate or resolve.</p>`},
+analytics(){const d=[['Network',34],['Account',22],['Hardware',15],['Email',12],['Security',8],['Infra',9]],p=[['Low',38],['Medium',34],['High',20],['Critical',8]],days=[40,52,48,61,58,35,44],cf=[2,5,9,24,60];
+ const cols=(a,sc)=>`<div class="cols" style="margin-bottom:24px">${a.map(x=>`<div data-w="${Math.round((Array.isArray(x)?x[1]:x)/sc*100)}" style="height:0"><span>${Array.isArray(x)?x[0]:''}</span></div>`).join('')}</div>`;
+ return `<h1>Analytics</h1><p class="sub">How the AI is performing across the company.</p><div class="grid g3">${[['Total Tickets',1284],['AI Resolved',824],['Human Resolved',312],['Escalated',148],['Avg Resolution (min)',18],['AI Resolution Rate %',64]].map(s=>`<div class="card stat"><span>${s[0]}</span><b data-n="${s[1]}">0</b></div>`).join('')}</div>
+ <div class="grid g2" style="margin-top:14px"><div class="card"><h2>Tickets by category</h2>${cols(d,40)}</div><div class="card"><h2>Tickets by priority</h2>${cols(p,40)}</div>
+ <div class="card"><h2>Resolved per day</h2>${cols(days.map((v,i)=>['MTWTFSS'[i],v]),70)}</div><div class="card"><h2>AI confidence distribution</h2>${cols(['<60','60-70','70-80','80-90','90+'].map((l,i)=>[l,cf[i]]),65)}</div>
+ <div class="card"><h2>AI vs human resolution</h2>${[['AI',64],['Human',24],['Escalated',12]].map(x=>`<p class="tag" style="margin:8px 0 4px">${x[0]} ${x[1]}%</p><div class="bar"><i data-w="${x[1]}"></i></div>`).join('')}</div><div class="card"><h2>Escalation rate</h2><p class="stat"><b style="font-size:38px">11.5%</b></p><p class="tag">148 of 1,284 tickets needed a human.</p></div></div>`},
+admin(){return `<h1>Admin</h1><p class="sub">Settings that shape how the AI decides.</p><div class="grid g2"><div class="card"><h2>AI settings</h2><label>Auto-resolve confidence threshold: <b id="thv">85</b>%</label><input type="range" min="50" max="99" value="85" oninput="thv.textContent=this.value"><label><input type="checkbox" checked style="width:auto;margin-right:8px">Always require human review for CRITICAL</label><label style="display:block"><input type="checkbox" checked style="width:auto;margin-right:8px">Block automatic infrastructure changes</label></div>
+ <div class="card"><h2>Categories</h2><p class="tag">${['Network','Hardware','Laptop','Operating System','Software','Account & Access','Email','Security','VPN','Infrastructure','Database','Application','Other'].map(c=>`<span class="pill OPEN" style="margin:0 6px 6px 0">${c}</span>`).join('')}</p></div>
+ <div class="card"><h2>IT teams</h2><p class="tag">Network Team · DevOps / Infrastructure · Security Team · Service Desk · Desktop Support · Messaging Team · Database Admins</p></div><div class="card"><h2>Priority rules</h2><p class="tag">Production or security impact → CRITICAL. Many users blocked or a near deadline → HIGH. Single-user work blocked → MEDIUM. Peripheral issue → LOW.</p></div></div>`}};
+const DEMOS=[['VPN issue','VPN is not connecting','My laptop is connected to Wi-Fi but I cannot connect to VPN. I have an important client meeting in 20 minutes.'],['Forgot password','I forgot my company password','I forgot my company password and cannot sign in.'],['Mouse stopped','My mouse stopped working','My mouse stopped working this morning.'],['Production outage','Production server is down','Production server is down and customers cannot access our website.'],['Suspicious email','Suspicious email','I received a suspicious email asking for my password.']];
+function kbCards(q){return KB.filter(d=>(d.t+d.c).toLowerCase().includes(q.toLowerCase())).map(d=>`<div class="card"><h3>${d.t}</h3><p class="tag">${d.c} · Updated ${d.u} · ${d.v.toLocaleString()} views</p><button class="btn g s" onclick="openGuide('${d.t}')">Open Guide</button></div>`).join('')||'<p class="sub">No guides match. Try a broader term.</p>'}
+function kbf(){$('#kg').innerHTML=kbCards($('#ks').value)}
+function openGuide(n){const d=KB.find(x=>x.t===n);d.v++;alert(d.t+'\n\n'+d.s.map((s,i)=>(i+1)+'. '+s).join('\n'))}
+function actions(t){
+ if(t.status==='RESOLVED')return `<div class="banner ok">✓ Ticket resolved · ${t.res} · ${t.method}</div>`;
+ if(t.status==='ESCALATED')return `<div class="banner no">✓ Ticket escalated to ${t.team}</div><p class="tag">Reason: ${t.a.why}</p>`;
+ const a=t.a;
+ if(t.confirm)return `<h2>Did this solve your problem?</h2><div class="row2"><button class="btn" onclick="solve('${t.id}',1)">Yes, Problem Solved</button><button class="btn g" onclick="solve('${t.id}',0)">No, Contact IT</button></div>`;
+ return `<div class="banner ${a.auto?'ok':'no'}">${a.auto?'AI CAN RESOLVE THIS TICKET':'HUMAN REVIEW REQUIRED'}</div><p class="tag" style="margin:0 0 12px">${a.why} Recommended team: <b style="color:var(--tx)">${a.team}</b></p><div class="row2">${a.auto?`<button class="btn" onclick="apply('${t.id}')">Apply Solution</button>`:`<button class="btn r" onclick="esc('${t.id}')">Escalate to ${a.team.split(' ')[0]}</button>`}<button class="btn g" onclick="location.hash='#/assistant'">Ask AI</button>${a.auto?`<button class="btn g" onclick="esc('${t.id}')">Escalate to IT</button>`:''}</div>`}
+function redo(id){$('#act').innerHTML=actions(get(id))}
+function apply(id){const t=get(id);t.confirm=1;log(t,'AI solution applied by employee');redo(id)}
+function solve(id,y){const t=get(id);t.confirm=0;if(y){t.status='RESOLVED';t.res=Math.max(8,Math.round((Date.now()-t.ts)/1000))+' sec';log(t,'Employee confirmed solution');log(t,'Ticket resolved')}else esc(id);redo(id)}
+function esc(id){const t=get(id);t.status='ESCALATED';t.confirm=0;t.method='Human';log(t,'Escalated to '+t.team+': '+t.a.why);redo(id)}
+const STEPS=['Reading ticket','Understanding problem','Detecting category','Detecting priority','Searching knowledge base','Generating solution'];
+function submitTicket(){const ti=$('#ti').value.trim(),de=$('#de').value.trim();if(!ti&&!de){$('#ti').focus();return}
+ $('#form').innerHTML=`<h2>AI analysis in progress</h2>${STEPS.map(s=>`<div class="step"><span class="d"></span>${s}</div>`).join('')}`;
+ const els=[...document.querySelectorAll('.step')];let i=0;
+ (function go(){if(i>0){els[i-1].className='step done';els[i-1].firstChild.textContent='✓'}if(i<els.length){els[i].className='step proc';i++;setTimeout(go,650)}else{
+  const a=analyze(ti,de),id=Math.max(...T.map(t=>t.id))+1;
+  T.unshift({id,title:ti||de.slice(0,40),desc:de,cat:a.cat,sub:a.sub,pri:a.pri,status:'OPEN',conf:a.conf,team:a.team,date:'Today',method:a.auto?'AI Assisted':'Human',res:'—',a,ts:Date.now(),
+   log:[[now(),'Ticket created'],[now(),'AI classification completed'],[now(),a.kb?'Knowledge base retrieved: '+a.kb.t:'No knowledge match'],[now(),'AI solution generated']]});
+  location.hash='#/analysis/'+id}})()}
+function chat(){const el=$('#cin'),v=el.value.trim();if(!v)return;el.value='';const c=$('#chat');c.innerHTML+=`<div class="msg u">${v.replace(/</g,'&lt;')}</div><div class="msg a" id="tp"><div class="skel" style="width:160px"></div></div>`;c.scrollTop=1e9;
+ setTimeout(()=>{const a=analyze(v,''),m=$('#tp');m.removeAttribute('id');
+  m.innerHTML=`I detected a <b>${a.sub.toLowerCase()}</b> issue.<br>Category: ${a.cat} · Priority: ${a.pri} · Confidence: ${a.conf}%<br><br>${a.kb&&a.auto?'Recommended steps:<ol style="padding-left:18px;margin:6px 0">'+a.kb.s.map(s=>`<li>${s}</li>`).join('')+'</ol>':'This needs a human. '+a.why}<div class="row2" style="margin-top:8px"><button class="btn s" onclick="location.hash='#/create?demo=0'">Create Ticket</button><button class="btn g s" onclick="this.textContent='Marked resolved ✓'">Mark Resolved</button><button class="btn g s" onclick="this.textContent='Escalated to ${a.team} ✓'">Escalate</button></div>`;c.scrollTop=1e9},900)}
+function render(){const h=location.hash.slice(2)||'',[p,rest]=h.split('?'),[pg,arg]=p.split('/'),q=new URLSearchParams(rest||'');
+ const page=pg||'home';$('#nav').innerHTML=`<div class="logo"><i></i>FixIQ</div>`+nav.map(n=>`<a href="#/${n[0]}" class="${n[0]===pg?'on':''}">${n[1]}</a>`).join('');
+ const f=V[page]||V.home;if(['analysis','ticket'].includes(page)&&!get(arg)){location.hash='#/dashboard';return}
+ $('#v').innerHTML=`<div class="view">${f(page==='create'?q:arg)}</div>`;window.scrollTo(0,0);
+ requestAnimationFrame(()=>setTimeout(()=>{document.querySelectorAll('[data-n]').forEach(count);bars()},30))}
+addEventListener('hashchange',render);render();
+</script></body></html>
